@@ -6,8 +6,12 @@
     background-color: slategray;
 }
 
+#searchBtn{
+    width: 100%;
+}
+
 .jumbotron{
-    background-color: slategray;
+    background-color: white;
 }
 h4{
     margin-top: 16px;
