@@ -1,10 +1,10 @@
 $(document).ready(function () {
 
-    var cityName = ""
+    // var cityName = ""
 
     // fetch JSON from forecast API and Current Weather API
-    function searchCity() {
-        cityName = $("#searchText").val().trim()
+    function searchCity(cityName) {
+        // cityName = $("#searchText").val().trim()
         var forecastURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&units=imperial&&APPID=af92d2b885e98b3813daca127757b875"
         var weatherURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&units=imperial&&APPID=af92d2b885e98b3813daca127757b875"
 
@@ -31,7 +31,7 @@ $(document).ready(function () {
     }
 
     // create past search buttons update jumbotron title
-    function updatePage() {
+    function updatePage(cityName) {
         var pastSearches = $("#pastsearches")
         var button = $("<button>")
 
@@ -80,9 +80,19 @@ $(document).ready(function () {
 
     // search button on click
     $("#searchBtn").click(function () {
-        searchCity()
-        updatePage()
+        var city = $("#searchText").val().trim()
+
+        searchCity(city)
+        updatePage(city)
         $("#searchText").val("")
+
+    })
+
+    $(document).on("click", ".pastSearchButton", function () {
+        console.log("click")
+        var buttontext = $(this).text()
+        searchCity(buttontext)
+        updatePage(buttontext)
 
     })
 })
