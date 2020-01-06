@@ -1,10 +1,7 @@
 $(document).ready(function () {
 
-    // var cityName = ""
-
     // fetch JSON from forecast API and Current Weather API
     function searchCity(cityName) {
-        // cityName = $("#searchText").val().trim()
         var forecastURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&units=imperial&&APPID=af92d2b885e98b3813daca127757b875"
         var weatherURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&units=imperial&&APPID=af92d2b885e98b3813daca127757b875"
 
@@ -12,11 +9,16 @@ $(document).ready(function () {
             url: forecastURL,
             method: "GET",
         }).then(function (response) {
-            // for (i = 0; i < response.list.length; i++) {
-            //     console.log(response.list[i].dt_txt)
-            // }
+            for (i = 0; i < response.list.length; i += 1) {
+                if (response.list[i].dt_txt.substring(11, 20) === "12:00:00") {
+                    console.log(response.list[i].dt_txt.substring(11, 20))
+                    console.log(response.list[i].main)
 
-            updateForecast(response)
+                }
+
+            }
+
+            // updateForecast(response)
 
         })
 
@@ -96,3 +98,11 @@ $(document).ready(function () {
 
     })
 })
+
+// update cards with forecast JSON data
+// add icons to cards and jumbotron
+// save past search data in local storage
+// clicking a past search button should not add a new button
+// navbar with light and dark mode (save preferences)
+// refactor code where possible
+// Update CSS 
