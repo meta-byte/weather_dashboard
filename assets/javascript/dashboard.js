@@ -78,6 +78,25 @@ $(document).ready(function () {
     // update 5 day forecast cards
     function updateForecast(response) {
 
+        var fiveDayForecast = $(".fivedayforecast")
+        var newColumn = $("<div>")
+        var card = $("<div>")
+        var forecast = $('<img src="" class="card-img-top" alt="">')
+        var cardbody = $("<div>")
+        var cardtitle = $("<h5>")
+
+        newColumn.attr("class", "col-2 forecast")
+        card.attr("class", "card")
+        cardbody.attr("class", "card-body")
+        cardtitle.attr("class", "card-title")
+
+        fiveDayForecast.append(newColumn)
+        newColumn.append(card)
+        card.append(forecast)
+        card.append(cardbody)
+        cardbody.append(cardtitle)
+
+
     }
 
     // search button on click
