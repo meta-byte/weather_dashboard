@@ -20,8 +20,6 @@ $(document).ready(function () {
 
             }
 
-            // updateForecast(response)
-
         })
 
         $.ajax({
@@ -36,34 +34,42 @@ $(document).ready(function () {
 
     // create past search buttons update jumbotron title
     function updatePage(cityName) {
+        var date = new Date();
+        isoDate = moment(date).format();
+        console.log(date)
         var pastSearches = $("#pastsearches")
         var button = $("<button>")
 
         console.log(cityName)
 
-        button.attr("class", "btn btn-secondary pastSearchButton")
+        button.attr("class", "btn btn-light pastSearchButton")
         button.text(cityName)
         pastSearches.append("<br>")
         pastSearches.append(button)
 
         $("#cityname").text(cityName)
+        $("#currentdate").text(isoDate.substring(6, 10))
 
 
     }
 
     //function to update current weather jumbotron
     function updateJumbo(response) {
+        var currentIcon = response.weather[0].icon
         var longitude = response.coord.lon
         var latitude = response.coord.lat
         var indexURL = "http://api.openweathermap.org/data/2.5/uvi?appid=af92d2b885e98b3813daca127757b875&lat=" + latitude + "&lon=" + longitude
-
+        console.log(response.weather.description)
         console.log(response.main.temp)
         console.log(response.main.humidity)
         console.log(response.wind.speed)
+
+        $("#currentdescription").text(response.weather[0].description)
         $("#currentTemp").text(parseInt(response.main.temp))
         $("#currentHumidity").text(response.main.humidity)
         $("#currentWind").text(parseInt(response.wind.speed))
         $("#currentUV").text()
+        $("#jumboimg").attr("src", "http://openweathermap.org/img/wn/" + currentIcon + "@2x.png")
 
         $.ajax({
             url: indexURL,
@@ -84,17 +90,16 @@ $(document).ready(function () {
         var newColumn = $("<div>")
         var card = $("<div>")
         var icon = forecast.weather[0].icon
-        var description = $("<h6>")
+        var description = $("<p>")
         var forecastIcon = $('<img src="http://openweathermap.org/img/wn/' + icon + '@2x.png" class="card-img-top" alt="">')
         var cardbody = $("<div>")
-        var cardtitle = $("<h6>")
-        var date = forecast.dt_txt.substring(0, 11)
+        var cardtitle = $("<h4>")
+        var date = forecast.dt_txt.substring(6, 11)
         var forecastTemp = $("<p>")
         var forecastHumid = $("<p>")
 
 
-
-        newColumn.attr("class", "col-2 justify-content-center text-center forecast")
+        newColumn.attr("class", "col-md-2 justify-content-center text-center forecast")
         card.attr("class", "card")
         cardbody.attr("class", "card-body")
         cardtitle.attr("class", "card-title")
@@ -110,6 +115,7 @@ $(document).ready(function () {
         card.append(forecastIcon)
         card.append(cardbody)
         cardbody.append(cardtitle)
+        cardbody.append("<hr>")
         cardbody.append(description)
         cardbody.append(forecastTemp)
         cardbody.append(forecastHumid)
@@ -121,6 +127,7 @@ $(document).ready(function () {
     $("#searchBtn").click(function () {
         var city = $("#searchText").val().trim()
 
+        $(".fivedayforecast").empty()
         searchCity(city)
         updatePage(city)
         $("#searchText").val("")
@@ -130,16 +137,13 @@ $(document).ready(function () {
     $(document).on("click", ".pastSearchButton", function () {
         console.log("click")
         var buttontext = $(this).text()
+        $(".fivedayforecast").empty()
         searchCity(buttontext)
         updatePage(buttontext)
 
     })
 })
 
-// update cards with forecast JSON data
-// add icons to cards and jumbotron
 // save past search data in local storage
 // clicking a past search button should not add a new button
-// navbar with light and dark mode (save preferences)
 // refactor code where possible
-// Update CSS 
