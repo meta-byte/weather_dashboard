@@ -12,8 +12,17 @@
 
 .jumbotron{
     background-color: white;
+    padding: 32px;
 }
+
 h4{
     margin-top: 16px;
     margin-bottom: 0px;
+}
+.card{
+    margin-bottom: 100px;
+}
+
+.card-body{
+    padding: 5px;
 }
