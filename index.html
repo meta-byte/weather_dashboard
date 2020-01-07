@@ -17,7 +17,7 @@
 </head>
 
 <body>
-    <div class="container-fluid">
+    <!-- <div class="container-fluid">
 
         <nav class="navbar">
             <div class="" id="navbarNav">
@@ -28,18 +28,18 @@
             </div>
         </nav>
     </div>
-
+ -->
     <!-- main containter -->
-    <div class="container-fluid ">
+    <div class="container-fluid main">
 
         <!-- row for two main columns -->
         <div class="row justify-content-center">
 
             <!-- small left column -->
-            <div class="col-2 leftcolumn text-center">
+            <div class="col-md-2 leftcolumn text-center">
                 <div>
-                    <h4>Past Searches</h4>
-                    <hr>
+                    <h4 id="pastsearchtitle">Past Searches</h4>
+                    <hr id="hr1">
                 </div>
                 <div id="pastsearches">
                     <!-- <button class="btn btn-secondary pastSearchButton">Salt Lake City</button> -->
@@ -47,38 +47,51 @@
             </div>
 
             <!-- large right column -->
-            <div class="col-10 rightcolumn">
-                <h2 class="display-5">Your Five Day Forecast</h2>
+            <div class="col-md-10 rightcolumn">
+                <!-- <h2 class="display-5">Your Five Day Forecast</h2> -->
 
                 <div class="row">
 
-                    <div class="col-10">
+                    <div class="col-md-10" id="searchbox">
                         <div class="form-group">
                             <input type="text" class="form-control" placeholder="search a city" id="searchText">
                         </div>
                     </div>
 
-                    <div class="col-2 text-center">
+                    <div class="col-md-2 text-center" id="button">
                         <button class="btn btn-dark" id="searchBtn" type="submit">Search</button>
-
                     </div>
                 </div>
 
                 <div class="row">
-                    <div class="col-12">
+                    <div class="col-md-12">
                         <div class="jumbotron">
-                            <h1 class="display-4" id="cityname"></h1>
+
+                            <div class="row">
+
+                                <div class="col-md-4 text-center justify-content-center">
+                                    <h1 class="display-4" id="cityname"></h1>
+                                    <h4 id="currentdate"></h4>
+
+                                </div>
+
+                                <div class="col-md-4 text-center justify-content-center">
+                                    <img id="jumboimg" alt="">
+                                    <h5><span id="currentdescription"></span></h5>
+
+                                </div>
+
+                            </div>
 
                             <hr class="my-4">
-                            <h4 id="currentdate">Date</h4>
+                            <!-- <h3 id="currentdate"></h3> -->
                             <br>
-                            <p>Temperature: <span id="currentTemp"></span>°F</p>
-                            <p>Humidity: <span id="currentHumidity"></span>%</p>
-                            <p>Wind Speed: <span id="currentWind"></span>mph</p>
-                            <p>UV Index: <span id="currentUV"></span></p>
-                            <br>
+                            <!-- <h5><span id="currentdescription"></span></h5> -->
+                            <h5>Temperature: <span id="currentTemp"></span>°F</h5>
+                            <h5>Humidity: <span id="currentHumidity"></span>%</h5>
+                            <h5>Wind Speed: <span id="currentWind"></span>mph</h5>
+                            <h5>UV Index: <span id="currentUV"></span></p>
                         </div>
-
 
                     </div>
                 </div>
@@ -88,64 +101,8 @@
                 <!-- row for 5 day forecast columns -->
                 <div class="row justify-content-center fivedayforecast">
 
-                    <!-- <div class="col-2 forecast" id="forecast1">
-                        <div class="card">
-                            <img src="" class="card-img-top" alt="">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the
-                                    bulk of the card's content.</p>
-                            </div>
-                        </div>
-                    </div> -->
-
-                    <!-- <div class="col-2" id="forecast2">
-                        <div class="card">
-                            <img src="" class="card-img-top" alt="">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the
-                                    bulk of the card's content.</p>
-                            </div>
-                        </div>
-                    </div> -->
-
-                    <!-- <div class="col-2" id="forecast3">
-                        <div class="card">
-                            <img src="" class="card-img-top" alt="">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the
-                                    bulk of the card's content.</p>
-                            </div>
-                        </div>
-
-                    </div> -->
-
-                    <!-- <div class="col-2" id="forecast4">
-                        <div class="card">
-                            <img src="" class="card-img-top" alt="">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the
-                                    bulk of the card's content.</p>
-                            </div>
-                        </div>
-
-                    </div> -->
-
-                    <!-- <div class="col-2" id="forecast5">
-                        <div class="card">
-                            <img src="" class="card-img-top" alt="">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the
-                                    bulk of the card's content.</p>
-                            </div>
-                        </div>
-                    </div> -->
-
                 </div>
+
             </div>
         </div>
     </div>
@@ -155,13 +112,14 @@
     <!-- Inline JavaScript -->
 
 
-    <!-- jQuery and Bootstrap JS -->
+    <!-- jQuery, Bootstrap.js, Moment.js, Dashboard.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
 
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 
     <script src="assets/javascript/dashboard.js"></script>
 
