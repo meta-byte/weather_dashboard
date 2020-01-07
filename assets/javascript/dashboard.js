@@ -11,8 +11,10 @@ $(document).ready(function () {
         }).then(function (response) {
             for (i = 0; i < response.list.length; i += 1) {
                 if (response.list[i].dt_txt.substring(11, 20) === "12:00:00") {
-                    console.log(response.list[i].dt_txt.substring(11, 20))
+                    console.log(response.list[i].dt_txt.substring(0, 11))
                     console.log(response.list[i].main)
+
+                    updateForecast(response.list[i])
 
                 }
 
@@ -75,26 +77,42 @@ $(document).ready(function () {
 
     }
 
-    // update 5 day forecast cards
-    function updateForecast(response) {
+    // create ancd update 5 day forecast cards
+    function updateForecast(forecast) {
 
         var fiveDayForecast = $(".fivedayforecast")
         var newColumn = $("<div>")
         var card = $("<div>")
-        var forecast = $('<img src="" class="card-img-top" alt="">')
+        var icon = forecast.weather[0].icon
+        var description = $("<h6>")
+        var forecastIcon = $('<img src="http://openweathermap.org/img/wn/' + icon + '@2x.png" class="card-img-top" alt="">')
         var cardbody = $("<div>")
-        var cardtitle = $("<h5>")
+        var cardtitle = $("<h6>")
+        var date = forecast.dt_txt.substring(0, 11)
+        var forecastTemp = $("<p>")
+        var forecastHumid = $("<p>")
 
-        newColumn.attr("class", "col-2 forecast")
+
+
+        newColumn.attr("class", "col-2 justify-content-center text-center forecast")
         card.attr("class", "card")
         cardbody.attr("class", "card-body")
         cardtitle.attr("class", "card-title")
+        forecastTemp.text(parseInt(forecast.main.temp) + "°F")
+        forecastHumid.text(parseInt(forecast.main.temp) + "% Humidity")
+
+
+        cardtitle.text(date)
+        description.text(forecast.weather[0].description)
 
         fiveDayForecast.append(newColumn)
         newColumn.append(card)
-        card.append(forecast)
+        card.append(forecastIcon)
         card.append(cardbody)
         cardbody.append(cardtitle)
+        cardbody.append(description)
+        cardbody.append(forecastTemp)
+        cardbody.append(forecastHumid)
 
 
     }
