@@ -1,7 +1,11 @@
 $(document).ready(function () {
 
+    var weatherSearches = []
+
     // fetch JSON from forecast API and Current Weather API
-    function searchCity(cityName) {
+    function searchCity(loadhistory) {
+
+        var cityName = loadhistory[0].city
         var forecastURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&units=imperial&&APPID=af92d2b885e98b3813daca127757b875"
         var weatherURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&units=imperial&&APPID=af92d2b885e98b3813daca127757b875"
 
@@ -33,24 +37,51 @@ $(document).ready(function () {
     }
 
     // create past search buttons update jumbotron title
-    function updatePage(cityName) {
+    function updatePage(loadhistory) {
+
+        loadhistory = JSON.parse(localStorage.getItem('history'))
+        console.log(loadhistory[0].city)
+
         var date = new Date();
         isoDate = moment(date).format();
         console.log(date)
+
         var pastSearches = $("#pastsearches")
-        var button = $("<button>")
 
-        console.log(cityName)
+        pastSearches.empty()
 
-        button.attr("class", "btn btn-light pastSearchButton")
-        button.text(cityName)
-        pastSearches.append("<br>")
-        pastSearches.append(button)
+        for (index = 0; index < loadhistory.length; index++) {
+            var button = $("<button>")
+            button.attr("class", "btn btn-light pastSearchButton")
+            button.text(loadhistory[index].city)
+            pastSearches.append("<br>")
+            pastSearches.append(button)
 
-        $("#cityname").text(cityName)
+        }
+
+        $("#cityname").text(loadhistory[0].city)
         $("#currentdate").text(isoDate.substring(6, 10))
 
 
+
+
+    }
+
+    function loadSearch() {
+        loadhistory = JSON.parse(localStorage.getItem('history'))
+
+        updatePage(loadhistory)
+        searchCity(loadhistory)
+
+    }
+
+    function saveSearch(city) {
+        weatherSearches.unshift({
+            city: city,
+        })
+
+        var sethistory = localStorage.setItem('history', JSON.stringify(weatherSearches))
+        loadSearch()
     }
 
     //function to update current weather jumbotron
@@ -120,16 +151,16 @@ $(document).ready(function () {
         cardbody.append(forecastTemp)
         cardbody.append(forecastHumid)
 
-
     }
+
 
     // search button on click
     $("#searchBtn").click(function () {
         var city = $("#searchText").val().trim()
 
         $(".fivedayforecast").empty()
-        searchCity(city)
-        updatePage(city)
+        saveSearch(city)
+
         $("#searchText").val("")
 
     })
@@ -138,12 +169,13 @@ $(document).ready(function () {
         console.log("click")
         var buttontext = $(this).text()
         $(".fivedayforecast").empty()
-        searchCity(buttontext)
-        updatePage(buttontext)
+        saveSearch(buttontext)
 
     })
+
+    loadSearch()
+
 })
 
 // save past search data in local storage
 // clicking a past search button should not add a new button
-// refactor code where possible
