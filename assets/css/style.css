@@ -1,9 +1,20 @@
-.leftcolumn{
-    background-color: darkgray;
+.body{
+    background-color: slategray !important;
 }
 
+.leftcolumn{
+    background-color: grey;
+}
+
+#pastsearchtitle{
+    color: white;
+}
+
+#hr1{
+    background-color: white;
+}
 .rightcolumn{
-    background-color: slategray;
+    background-color: #839CB5;
 }
 
 #searchBtn{
@@ -11,8 +22,13 @@
 }
 
 .jumbotron{
-    background-color: white;
+    background-color: #B1E1E9;
     padding: 32px;
+    margin-top: 15px;
+}
+
+#cityname{
+    margin-top: 15px;
 }
 
 h4{
@@ -20,9 +36,26 @@ h4{
     margin-bottom: 0px;
 }
 .card{
-    margin-bottom: 100px;
+    background-color: #B1E1E9;
+    margin-bottom: 30px;
 }
 
 .card-body{
     padding: 5px;
+}
+
+#searchbox{
+    margin-top: 30px;
+}
+
+#button{
+    margin-top: 30px;
+}
+
+.btn-light{
+    background-color: #F2E4F9;
+}
+
+.pastSearchButton{
+    margin-bottom: 15px;
 }
