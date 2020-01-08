@@ -2,6 +2,10 @@ $(document).ready(function () {
 
     var weatherSearches = []
 
+    if (localStorage.getItem('history') != null) {
+        weatherSearches = JSON.parse(localStorage.getItem('history'))
+    }
+
     // fetch JSON from forecast API and Current Weather API
     function searchCity(loadhistory) {
 
